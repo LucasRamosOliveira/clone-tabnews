@@ -1,7 +1,7 @@
 services:
   database:
     image: "postgres:16.0-alpine3.18"
-    environment:
-      POSTGRES_PASSWORD: "local_password"
+    ENV_FILE:
+      - ../.env
     ports:
       - "5432:5432"
