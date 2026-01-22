@@ -1,8 +1,8 @@
 import orchestrator from "tests/orchestrator.js";
 
 beforeAll(async () => {
-  await orchestrator.waitForAllServices()ç
-})
+  await orchestrator.waitForAllServices();
+});
 
 test("GET to /api/v1/status shoud return 200", async () => {
   const response = await fetch("http://localhost:3000/api/v1/status");
