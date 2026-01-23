@@ -6,7 +6,7 @@ async function query(queryObject) {
     client = await getNewClient();
     const result = await client.query(queryObject);
     return result;
-  } catch {
+  } catch (error) {
     console.error(error);
     throw error;
   } finally {
@@ -23,20 +23,24 @@ async function getNewClient() {
     password: process.env.POSTGRES_PASSWORD,
     ssl: getSSLValues(),
   });
+
   await client.connect();
   return client;
 }
 
-export default {
+const database = {
   query,
   getNewClient,
 };
 
+export default database;
+
 function getSSLValues() {
-  if (process.env.POSTGRESS_CA) {
+  if (process.env.POSTGRES_CA) {
     return {
-      ca: process.env.POSTGRESS_CA,
+      ca: process.env.POSTGRES_CA,
     };
   }
+
   return process.env.NODE_ENV === "production" ? true : false;
 }
